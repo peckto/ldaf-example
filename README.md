@@ -78,7 +78,7 @@ This example contains two modules: `Module_1.py`, `Module_2.py`
 
 ##### example_1
 
-This analysis function shows how to plot a figure with gglot:
+This analysis function shows how to plot a figure with ggplot:
 
 ```python
 def example_1(app: 'App', fig=None):
@@ -98,7 +98,7 @@ def example_1(app: 'App', fig=None):
 
 ![Example_1_ggplot](res/module1_example1.png)
 
-> :info: The custom ggplot version does also support the picker event for scatter plots
+> :warning: The custom ggplot version does also support the picker event for scatter plots
 
 ```python
     [...]
@@ -187,7 +187,7 @@ def example_3(app: 'App', fig=None):
 
 ![Example_3_2D](res/module1_example3.png)
 
-> :info: The 3D figure does also support the picker event.
+> :warning: The 3D figure does also support the picker event.
 
 #### Module_2
 
