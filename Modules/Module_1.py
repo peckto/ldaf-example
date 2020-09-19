@@ -89,7 +89,7 @@ def example_2(app: 'App', fig=None):
     ax.grid(True)
 
     # install onpick event handler
-    app.handler_f = onpick
+    app.current_module.handler_f = onpick
 
     # Indicate that we created a figure with matplotlib
     return 'matplotlib'
