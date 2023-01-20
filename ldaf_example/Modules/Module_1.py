@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Tobias Specht
+# Copyright (C) 2023 Tobias Specht
 # This file is part of ldaf-example <https://github.com/peckto/ldaf-example>.
 #
 # ldaf-example is free software: you can redistribute it and/or modify
@@ -15,7 +15,6 @@
 # along with ldaf-example.  If not, see <http://www.gnu.org/licenses/>.
 
 import numpy as np
-from ggplot import *
 import matplotlib.style
 matplotlib.style.use('ggplot')
 
@@ -38,22 +37,28 @@ table = 'example1'
 
 def example_1(app: 'App', fig=None):
     """Example taken from:
-    http://ggplot.yhathq.com/
+    https://matplotlib.org/stable/gallery/lines_bars_and_markers/cohere.html#sphx-glr-gallery-lines-bars-and-markers-cohere-py
 
     """
     # Get data set from data_source
-    df = app.data_source.get_table('meat')
+    df = app.data_source.get_table('sin')
 
-    # create ggplot figure as usual
-    g = ggplot(aes(x='date', y='beef'), data=df)
-    g += geom_line()
+    # create Axis from provided fig object
+    axs = fig.add_subplot(111)
 
-    return g
+    # Plot as usual
+    axs.plot(df.t, df.s1, df.t, df.s2)
+    axs.set_xlim(0, 2)
+    axs.set_xlabel('Time')
+    axs.set_ylabel('s1 and s2')
+    axs.grid(True)
+
+    return 'matplotlib'
 
 
 def example_2(app: 'App', fig=None):
     """Example taken from:
-    https://matplotlib.org/gallery/lines_bars_and_markers/scatter_demo2.html
+    https://matplotlib.org/stable/gallery/lines_bars_and_markers/cohere.html#sphx-glr-gallery-lines-bars-and-markers-cohere-py
 
     """
     def onpick(event):
@@ -129,11 +134,7 @@ def example_3(app: 'App', fig=None):
 
 
 functions = {
-    'Example 1 ggolot': example_1,
-    'Example 2 2D': example_2,
+    'Example 1 line': example_1,
+    'Example 2 scatter': example_2,
     'Example 3 3D': example_3,
 }
-
-
-if __name__ == '__main__':
-    pass

@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Tobias Specht
+# Copyright (C) 2023 Tobias Specht
 # This file is part of ldaf-example <https://github.com/peckto/ldaf-example>.
 #
 # ldaf-example is free software: you can redistribute it and/or modify
@@ -14,14 +14,38 @@
 # You should have received a copy of the GNU General Public License
 # along with ldaf-example.  If not, see <http://www.gnu.org/licenses/>.
 
-from ldaf.Settings import Settings as Settings_L
+import matplotlib.style
+matplotlib.style.use('ggplot')
+
+import typing
+if typing.TYPE_CHECKING:
+    from ldaf.App import App
 
 
-class Settings(Settings_L):
-    def add_settings(self):
-        self.cb_tables = self.settings_add_combo_box('Table', [])
+settings = {}
+"Work in process"
+actions = {}
+"Work in process"
 
-    def update_tables_cb(self):
-        self.cb_tables.clear()
-        tables = self.app.data_source.get_loaded_tables()
-        self.cb_tables.addItems(tables)
+name = 'Module 2'
+"Display name of module"
+table = 'example2'
+"is mapped to app.active_table, WIP"
+
+
+def example_1(app: 'App', fig=None):
+    # Read setting Table from UI
+    table = app.settings.get('Table')
+
+    # Get data set from data_source
+    df = app.data_source.get_table(table)
+
+    # name attribute must be set and is displayed as title above the table
+    df.name = '%s Data' % table
+
+    return df
+
+
+functions = {
+    'Example 1 Table': example_1,
+}
