@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ldaf-example"
+version = "0.2.0"
+description = "LDAF Example"
+authors = ["Tobias Specht <specht.tobias@gmx.de>"]
+license = "GPL"
+readme = "README.md"
+packages = [{include = "ldaf_example"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ldaf = { git = "https://github.com/peckto/ldaf.git" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+ldaf-example = "ldaf_example.main:main"

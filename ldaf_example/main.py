@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Tobias Specht
+# Copyright (C) 2023 Tobias Specht
 # This file is part of ldaf-example <https://github.com/peckto/ldaf-example>.
 #
 # ldaf-example is free software: you can redistribute it and/or modify
@@ -14,42 +14,28 @@
 # You should have received a copy of the GNU General Public License
 # along with ldaf-example.  If not, see <http://www.gnu.org/licenses/>.
 
-import matplotlib.style
-matplotlib.style.use('ggplot')
+import sys
+from PyQt5.QtWidgets import QApplication
+import pandas as pd
 
-import typing
-if typing.TYPE_CHECKING:
-    from ldaf.App import App
+from ldaf.App import App
+from .Settings import Settings
+from .DataSource import DataSource
 
-
-settings = {}
-"Work in process"
-actions = {}
-"Work in process"
-
-name = 'Module 2'
-"Display name of module"
-table = 'example2'
-"is mapped to app.active_table, WIP"
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
 
 
-def example_1(app: 'App', fig=None):
-    # Read setting Table from UI
-    table = app.settings.get('Table')
+def main():
+    app = QApplication(sys.argv)
+    data_source = DataSource()
+    settings = Settings()
+    modules_dir = 'ldaf_example/Modules'
+    window_title = 'LDAF - Examples'
 
-    # Get data set from data_source
-    df = app.data_source.get_table(table)
+    window = App(app, data_source, modules_dir, settings, window_title)
+    window.show()
 
-    # name attribute must be set and is displayed as title above the table
-    df.name = '%s Data' % table
+    sys.exit(app.exec_())
 
-    return df
-
-
-functions = {
-    'Example 1 Table': example_1,
-}
-
-
-if __name__ == '__main__':
-    pass

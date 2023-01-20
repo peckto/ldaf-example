@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Tobias Specht
+# Copyright (C) 2023 Tobias Specht
 # This file is part of ldaf-example <https://github.com/peckto/ldaf-example>.
 #
 # ldaf-example is free software: you can redistribute it and/or modify
@@ -14,27 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with ldaf-example.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
-from PyQt5.QtWidgets import QApplication
-import pandas as pd
-
-from ldaf.App import App
-from Settings import Settings
-from DataSource import DataSource
-
-pd.set_option('display.max_rows', 500)
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000)
+from ldaf.Settings import Settings as Settings_L
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    data_source = DataSource()
-    settings = Settings()
-    modules_dir = 'Modules'
-    window_title = 'LDAF - Examples'
+class Settings(Settings_L):
+    def add_settings(self):
+        self.cb_tables = self.settings_add_combo_box('Table', [])
 
-    window = App(app, data_source, modules_dir, settings, window_title)
-    window.show()
-
-    sys.exit(app.exec_())
+    def update_tables_cb(self):
+        self.cb_tables.clear()
+        tables = self.app.data_source.get_loaded_tables()
+        self.cb_tables.addItems(tables)
